@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import { ShoppingCart, Plus, Minus } from "lucide-react";
+import CustomCard from "../SamplePackCard/SamplePackCard";
 
 export default function ShopSection() {
   const scrollRef1 = useRef(null);
@@ -96,8 +97,13 @@ export default function ShopSection() {
         id="shop"
         className="text-center scroll-margin-top-navbar bg-white "
       >
-        <h2 className="text-2xl md:text-4xl font-bold mt-20 mb-10 animate-fade-up">Shop</h2>
-        <section id="fourway" className=" scroll-margin-top-navbar animate-fade-up">
+        <h2 className="text-2xl md:text-4xl font-bold mt-25 mb-10 animate-fade-up">
+          Shop
+        </h2>
+        <section
+          id="fourway"
+          className=" scroll-margin-top-navbar animate-fade-up"
+        >
           <div className="inline-flex items-center w-full max-w-6xl mx-auto">
             <span className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent" />
             <p className=" px-2 sm:px-2 lg:px-6 text-[12px] sm:text-[12px] lg:text-[12px] xl:text-[14px] uppercase tracking-widest text-gray-600">
@@ -242,7 +248,7 @@ export default function ShopSection() {
       {/* Paper Material Wear section */}
       <section
         id="paper"
-        className="text-center mt-10 scroll-margin-top-navbar animate-fade-up"
+        className="text-center mt-15 scroll-margin-top-navbar animate-fade-up"
       >
         <div className="inline-flex items-center w-full max-w-6xl mx-auto">
           <span className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent" />
@@ -344,7 +350,7 @@ export default function ShopSection() {
         </div>
       </div>
 
-      <div id="tlight" className="bg-[#FAF0E3] ">
+      <div id="tlight" className="bg-[#faf3e3] scroll-margin-top-navbar">
         {/* Full-height centering container */}
         <div className="mb-20 py-12 px-5 flex items-center justify-center">
           {/* Max-width + auto margins = perfect horizontal centering */}
@@ -424,6 +430,16 @@ export default function ShopSection() {
               </div>
             </a>
           </section>
+        </div>
+      </div>
+
+      <div id="samplekit" className="scroll-margin-top-navbar flex justify-center items-center">
+        <div className="p-6 animate-fade-up">
+          <CustomCard
+            title={<><span style={{ color: "#643F18", fontSize: "24px" }}>Free</span> Spa Wear Sample Kit{""}</>}
+            text="Unsure which product suits your needs? Our sample kit includes all 7 items (1 piece each), so you can touch, compare, and decide with confidence completely free."
+            imgSrc="/images/White_DU.png"
+          />
         </div>
       </div>
     </div>

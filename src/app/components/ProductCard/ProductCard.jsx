@@ -78,7 +78,7 @@ export default function ProductCard({
             )}
           </div>
 
-          {/* Rest of your card — 100% untouched */}
+          
           <div className="p-4 space-y-3">
             <div className="flex justify-between items-center mb-0">
               <h2 className="text-sm md:text-base font-bold text-gray-900 truncate">
@@ -108,9 +108,9 @@ export default function ProductCard({
             </div>
 
             <div className="flex justify-between items-center">
-              <div className="flex items-center gap-3">
-                <span className="text-xs md:text-sm font-medium text-gray-600">Packs:</span>
-                <div className="w-[70px] h-[30px] sm:w-[80px] sm:h-[35px] md:w-[90px] md:h-[40px] lg:w-[100px] lg:h-[45px] flex items-center border border-gray-300 rounded-md overflow-hidden">
+              <div className="flex items-center gap-1">
+                <span className="text-xs md:text-sm font-medium text-gray-600">Packs :</span>
+                <div className="w-[70px] h-[30px] sm:w-[80px] sm:h-[35px] md:w-[90px] md:h-[40px] lg:w-[90px] lg:h-[40px] flex items-center border border-gray-300 rounded-md overflow-hidden">
                   <button
                     onClick={(e) => { e.stopPropagation(); packs > 1 && setPacks(packs - 1); }}
                     className="w-9 h-9 flex items-center justify-center hover:bg-gray-100 transition"
@@ -139,7 +139,7 @@ export default function ProductCard({
               <button className="flex-1 h-10 md:h-11 bg-black text-white font-semibold text-sm hover:bg-zinc-800 active:scale-98 transition-all">
                 Buy Now
               </button>
-              <button className="w-10 h-10 md:w-11 md:h-11 bg-white border-2 border-gray-200 flex items-center justify-center hover:bg-gray-50 active:scale-95 transition-all">
+              <button className="w-10 h-10 md:w-11 md:h-11 bg-white border-2 border-gray-200 flex items-center justify-center hover:bg-gray-100 active:scale-95 transition-all">
                 <ShoppingCart className="w-4 h-4 md:w-5 md:h-5" />
               </button>
             </div>

@@ -92,7 +92,7 @@ export default function HeroSection() {
 
         <div className="button-group flex flex-wrap justify-center gap-4">
           <a href="#shop" className="reversed-btn">Shop Now</a>
-          <a className="normal-btn">Contact Seller</a>
+          <a href="#samplekit" className="normal-btn">Free Samples</a>
         </div>
       </div>
 

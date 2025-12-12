@@ -1,7 +1,10 @@
 
 import Navbar from "../app/components/Navbar";
 import HeroSection from "../app/components/HeroSection/hero";
-import ShopSection from "../app/components/Shop/fourway";
+import ShopSection from "./components/Shop/fourway";
+import AboutUs from "./components/AboutUs";
+import ContactUs from "./components/ContactUs";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
@@ -10,6 +13,9 @@ export default function Home() {
         
         <HeroSection/>
         <ShopSection/>
+        <AboutUs />
+        <ContactUs />
+        <Footer/>
         
       </main>
     </div>
