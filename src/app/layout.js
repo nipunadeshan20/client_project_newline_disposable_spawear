@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
       {/* This single prop fixes the Grammarly hydration warning */}
       <body className="antialiased" suppressHydrationWarning={true}>
         {/* If you want Navbar in the layout (most people do) */}
-        <Navbar />
+        
         <ScrollAnimation />
 
         
