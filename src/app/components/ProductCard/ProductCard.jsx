@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Minus, ShoppingCart, X } from "lucide-react";
+import { Plus, Minus, ShoppingCart, X, Check } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 
 export default function ProductCard({
+  product,
   images,
   color,
   title,
@@ -11,21 +13,66 @@ export default function ProductCard({
   defaultInfo = "(Each pack contains 100 pieces.)",
   extraInfo = [],
   initialPacks = 1,
+  onOpenCart,
 }) {
   const [packs, setPacks] = useState(initialPacks);
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isFullscreenOpen, setIsFullscreenOpen] = useState(false);
+  const [addedToCart, setAddedToCart] = useState(false);
+
+  const { addToCart } = useCart();
 
   const totalPrice = pricePerPack * packs;
+
+  // Handle Add to Cart
+  const handleAddToCart = (e) => {
+    e.stopPropagation();
+    if (!product) return;
+
+    const productData = {
+      _id: product._id,
+      itemName: product.itemName || title,
+      category: product.category,
+      color: product.color || color,
+      material: product.material,
+      images: images,
+      pricePerPack: pricePerPack,
+    };
+
+    addToCart(productData, packs);
+    setAddedToCart(true);
+    setTimeout(() => setAddedToCart(false), 1500);
+  };
+
+  // Handle Buy Now - Add to cart and open cart drawer
+  const handleBuyNow = (e) => {
+    e.stopPropagation();
+    if (!product) return;
+
+    const productData = {
+      _id: product._id,
+      itemName: product.itemName || title,
+      category: product.category,
+      color: product.color || color,
+      material: product.material,
+      images: images,
+      pricePerPack: pricePerPack,
+    };
+
+    addToCart(productData, packs);
+    
+    // Open cart drawer via event
+    window.dispatchEvent(new CustomEvent('openCart'));
+  };
 
   const nextImage = () => setCurrentImageIndex((prev) => (prev + 1) % images.length);
   const prevImage = () => setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
 
   return (
     <>
-      <div className="group w-full max-w-[320px] mx-auto">
-        <div className="bg-white shadow-lg overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl">
+      <div className="group w-full max-w-[320px] mx-auto h-full">
+        <div className="bg-white shadow-lg overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl h-full flex flex-col">
           {/* Image Container */}
           <div className="relative aspect-rectangle bg-white flex items-center justify-center overflow-hidden">
             {/* Click ONLY the image to open fullscreen */}
@@ -79,7 +126,7 @@ export default function ProductCard({
           </div>
 
           
-          <div className="p-4 space-y-3">
+          <div className="p-4 space-y-3 flex-1 flex flex-col">
             <div className="flex justify-between items-center mb-0">
               <h2 className="text-sm md:text-base font-bold text-gray-900 truncate">
                 {title}
@@ -108,7 +155,7 @@ export default function ProductCard({
             </div>
 
             <div className="flex justify-between items-center">
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1 flex-shrink-0">
                 <span className="text-xs md:text-sm font-medium text-gray-600">Packs :</span>
                 <div className="w-[70px] h-[30px] sm:w-[80px] sm:h-[35px] md:w-[90px] md:h-[40px] lg:w-[90px] lg:h-[40px] flex items-center border border-gray-300 rounded-md overflow-hidden">
                   <button
@@ -127,20 +174,34 @@ export default function ProductCard({
                 </div>
               </div>
 
-              <div className="text-right">
+              <div className="text-right min-w-[90px] flex-shrink-0">
                 <span className="text-xs text-gray-500">LKR</span>
-                <span className="text-sm md:text-base font-bold text-gray-900 ml-1">
+                <span className="text-sm md:text-base font-bold text-gray-900 ml-1 tabular-nums">
                   {totalPrice.toLocaleString()}
                 </span>
               </div>
             </div>
 
-            <div className="flex gap-2 pt-2">
-              <button className="flex-1 h-10 md:h-11 bg-black text-white font-semibold text-sm hover:bg-zinc-800 active:scale-98 transition-all">
+            <div className="flex gap-2 pt-2 mt-auto">
+              <button 
+                onClick={handleBuyNow}
+                className="flex-1 h-10 md:h-11 bg-black text-white font-semibold text-sm hover:bg-zinc-800 active:scale-98 transition-all"
+              >
                 Buy Now
               </button>
-              <button className="w-10 h-10 md:w-11 md:h-11 bg-white border-2 border-gray-200 flex items-center justify-center hover:bg-gray-100 active:scale-95 transition-all">
-                <ShoppingCart className="w-4 h-4 md:w-5 md:h-5" />
+              <button 
+                onClick={handleAddToCart}
+                className={`w-10 h-10 md:w-11 md:h-11 border-2 flex items-center justify-center active:scale-95 transition-all ${
+                  addedToCart 
+                    ? "bg-green-500 border-green-500 text-white" 
+                    : "bg-white border-gray-200 hover:bg-gray-100"
+                }`}
+              >
+                {addedToCart ? (
+                  <Check className="w-4 h-4 md:w-5 md:h-5" />
+                ) : (
+                  <ShoppingCart className="w-4 h-4 md:w-5 md:h-5" />
+                )}
               </button>
             </div>
           </div>

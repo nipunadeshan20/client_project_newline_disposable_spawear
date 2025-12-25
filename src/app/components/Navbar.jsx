@@ -89,12 +89,12 @@ export default function Navbar() {
                 <img src="/icons/instagram_icon.png" className="w-5.5 h-5.5 hover:opacity-70 transition" />
               </a>
             </div>
-            <CartButton count={3} />
+            <CartButton />
           </nav>
 
           {/* Mobile Cart */}
           <div className="lg:hidden flex-1 flex justify-end">
-            <CartButton count={3} />
+            <CartButton />
           </div>
         </div>
       </header>

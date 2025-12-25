@@ -1,49 +1,61 @@
 "use client";
 
-import { useState } from "react";
 import { Plus, Minus, Trash } from "lucide-react";
 import "./CartItem.css";
 
-export default function CartItem({ initialPacks = 1, pricePerPack = 4500 }) {
-  const [packs, setPacks] = useState(initialPacks);
-  const totalPrice = pricePerPack * packs;
+export default function CartItem({ 
+  item,
+  onUpdateQuantity,
+  onRemove,
+}) {
+  if (!item) return null;
+
+  const totalPrice = (item.pricePerPack || 4500) * item.quantity;
+  
+  // Display info based on category
+  const displayColor = item.color || "N/A";
+  const displayMaterial = item.material || item.category;
+  const isSampleKit = item.isSampleKit;
+
   return (
     <div className="flex gap-3">
-      {/* Checkbox */}
-      <input
-        type="checkbox"
-        className="w-4 h-4 mt-2 cursor-pointer"
-        defaultChecked
-      />
-
       {/* Image */}
       <img
-        src="/images/White_DU.png"
-        className="w-24 h-20 object-cover responsive-img"
-        alt="Product"
+        src={item.image || "/images/White_DU.png"}
+        className="w-24 h-20 object-cover responsive-img rounded"
+        alt={item.itemName}
       />
 
       {/* Details */}
       <div className="flex flex-col justify-between w-full">
         <div>
           <div className="flex items-start justify-between">
-            <p className="font-semibold text-[14px]">Disposable Underwear</p>
+            <p className="font-semibold text-[14px]">{item.itemName}</p>
 
             {/* Delete Icon */}
             <button
-              onClick={() => console.log("delete clicked")}
+              onClick={() => onRemove && onRemove(item.productId, item.color)}
               className="text-gray-500 hover:text-red-600 transition"
             >
               <Trash size={16} />
             </button>
           </div>
 
-          {/* Color */}
-          <div>
-            <span className=" text-gray-700 text-[10px]">White</span>
-            <span className=" text-gray-700 text-[10px]"> | </span>
-            <span className=" text-gray-700 text-[10px]">Fourway material</span>
-          </div>
+          {/* Color & Material */}
+          {!isSampleKit && (
+            <div>
+              {item.color && (
+                <>
+                  <span className="text-gray-700 text-[10px]">{displayColor}</span>
+                  <span className="text-gray-700 text-[10px]"> | </span>
+                </>
+              )}
+              <span className="text-gray-700 text-[10px]">{displayMaterial}</span>
+            </div>
+          )}
+          {isSampleKit && (
+            <span className="text-green-600 text-[10px] font-medium">Free Sample Kit</span>
+          )}
         </div>
 
         {/* Packs & Pricing */}
@@ -56,21 +68,27 @@ export default function CartItem({ initialPacks = 1, pricePerPack = 4500 }) {
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  packs > 1 && setPacks(packs - 1);
+                  if (item.quantity > 1 && onUpdateQuantity) {
+                    onUpdateQuantity(item.productId, item.color, item.quantity - 1);
+                  }
                 }}
-                className="w-9 h-9 flex items-center justify-center hover:bg-gray-100 transition"
+                disabled={isSampleKit}
+                className="w-9 h-9 flex items-center justify-center hover:bg-gray-100 transition disabled:opacity-50"
               >
                 <Minus className="w-3 h-3" />
               </button>
               <span className="w-12 text-center font-semibold text-[12px]">
-                {packs}
+                {item.quantity}
               </span>
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  setPacks(packs + 1);
+                  if (onUpdateQuantity) {
+                    onUpdateQuantity(item.productId, item.color, item.quantity + 1);
+                  }
                 }}
-                className="w-9 h-9 flex items-center justify-center hover:bg-gray-100 transition"
+                disabled={isSampleKit}
+                className="w-9 h-9 flex items-center justify-center hover:bg-gray-100 transition disabled:opacity-50"
               >
                 <Plus className="w-3 h-3" />
               </button>
@@ -78,10 +96,16 @@ export default function CartItem({ initialPacks = 1, pricePerPack = 4500 }) {
           </div>
 
           <div className="text-right">
-            <span className="text-[10px] text-gray-500">LKR</span>
-            <span className="text-sm md:text-base font-bold text-gray-900 ml-1">
-              {totalPrice.toLocaleString()}
-            </span>
+            {isSampleKit ? (
+              <span className="text-sm md:text-base font-bold text-green-600">FREE</span>
+            ) : (
+              <>
+                <span className="text-[10px] text-gray-500">LKR</span>
+                <span className="text-sm md:text-base font-bold text-gray-900 ml-1">
+                  {totalPrice.toLocaleString()}
+                </span>
+              </>
+            )}
           </div>
         </div>
       </div>
