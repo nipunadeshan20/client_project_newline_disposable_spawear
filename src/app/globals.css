@@ -1,0 +1,69 @@
+@import "tailwindcss";
+@tailwind utilities;
+
+html {
+  font-family: var(--font-montserrat), sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .scroll-margin-top-navbar {
+    scroll-margin-top: 100px; /* Desktop */
+  }
+  
+  /* Tabular numbers for consistent width pricing */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .scroll-margin-top-navbar {
+    scroll-margin-top: 90px;
+  }
+}
+
+@media (max-width: 640px) {
+  .scroll-margin-top-navbar {
+    scroll-margin-top: 80px; /* Mobile – navbar is smaller */
+  }
+}
+
+/* Fade up animation */
+.animate-fade-up {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.98s ease, transform 0.98s ease;
+}
+.animate-fade-up.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fade right */
+.animate-fade-right {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 0.98s ease, transform 0.98s ease;
+}
+.animate-fade-right.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Fade left */
+.animate-fade-left {
+  opacity: 0;
+  transform: translateX(-200px);
+  transition: opacity 0.98s ease, transform 0.98s ease;
+}
+.animate-fade-left.show {
+  opacity: 1;
+  transform: translateX(0);
+}

@@ -1,0 +1,131 @@
+/* src/app/components/Logo_loop/logo_loop.css */
+
+.logoloop {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  background: transparent;
+}
+
+.logoloop__track {
+  display: flex;
+  will-change: transform;
+}
+
+/* Horizontal */
+.logoloop--horizontal .logoloop__track {
+  flex-direction: row;
+}
+
+.logoloop--horizontal .logoloop__list {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  gap: var(--logoloop-gap, 32px);
+  align-items: center;
+  height: var(--logoloop-logoHeight, 28px);
+}
+
+/* Vertical */
+.logoloop--vertical {
+  height: 100%;
+}
+
+.logoloop--vertical .logoloop__track {
+  flex-direction: column;
+  height: 100%;
+}
+
+.logoloop--vertical .logoloop__list {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: var(--logoloop-gap, 32px);
+  align-items: center;
+  width: var(--logoloop-logoHeight, 28px);
+}
+
+/* THIS IS THE KEY FIX → Force images to respect logoHeight */
+.logoloop__item img,
+.logoloop__item svg {
+  height: var(--logoloop-logoHeight, 28px) !important;
+  width: auto !important;
+  max-width: none !important;
+  object-fit: contain;
+  display: block;
+}
+
+/* Links & nodes */
+.logoloop__link,
+.logoloop__node {
+  display: block;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  transition: transform 300ms ease;
+}
+
+.logoloop--scale-hover .logoloop__link:hover,
+.logoloop--scale-hover .logoloop__node:hover {
+  transform: scale(1.1);
+}
+
+/* Fade edges */
+.logoloop--fade::before,
+.logoloop--fade::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.logoloop--fade::before {
+  left: 0;
+  background: linear-gradient(to right, var(--logoloop-fadeColor, #ffffff), transparent);
+}
+
+.logoloop--fade::after {
+  right: 0;
+  background: linear-gradient(to left, var(--logoloop-fadeColor, #ffffff), transparent);
+}
+
+
+
+
+
+
+
+.logoloop {
+  --logoloop-logoHeight: 30px !important;  
+  --logoloop-gap: 0px !important;
+}
+
+@media (min-width: 425px) {
+  .logoloop {
+    --logoloop-logoHeight: 35px !important;
+    --logoloop-gap: 5px !important;
+  }
+}
+
+@media (min-width: 640px) {
+  .logoloop {
+    --logoloop-logoHeight: 50px !important;
+    --logoloop-gap: 10px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .logoloop {
+    --logoloop-logoHeight: 50px !important;
+    --logoloop-gap: 30px !important;
+  }
+}
+
+@media (min-width: 1440px) {
+  .logoloop {
+    --logoloop-logoHeight: 50px !important;
+    --logoloop-gap: 40px !important;
+  }
+}

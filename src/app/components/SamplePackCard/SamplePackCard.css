@@ -1,0 +1,118 @@
+/* Container */
+.custom-card {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.06);
+  position: relative; /* important for pseudo-element */
+  box-shadow: 2px 4px 18px rgba(53, 42, 22, 0.187);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  max-width: 720px;
+  padding-inline: 20px;
+}
+
+/* Gradient border bottom */
+.custom-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px; /* same thickness as your old border */
+  background: linear-gradient(90deg, #643F18, #D7A556);
+}
+
+
+
+
+/* Hover */
+.custom-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(16,24,40,0.12);
+}
+
+/* Image column */
+/* .custom-card__image-wrap {
+  flex: 0 0 160px; 
+  min-width: 120px;
+  max-width: 220px;
+  height: 240px;
+  overflow: hidden;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+/* .custom-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+} */
+
+/* Body */
+.custom-card__body {
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  color: #0f172a; /* text color */
+}
+
+/* Title */
+.custom-card__title {
+  margin: 0;
+  font-size: 1.4rem;
+  line-height: 1.2;
+  font-weight: 700;
+  color: inherit;
+  text-align: center;
+}
+
+/* Text */
+.custom-card__text {
+  margin: 0;
+  font-size: 0.95rem; /* ~15px */
+  color: #475569;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* Responsive: stack vertically on small screens */
+@media (max-width: 640px) {
+  .custom-card {
+    flex-direction: column;
+    max-width: 100%;
+    padding-inline: 10px;
+  }
+  /* .custom-card__image-wrap {
+    width: 100%;
+    flex: 0 0 auto;
+    height: 200px;
+  } */
+  .custom-card__body {
+    padding: 12px;
+  }
+}
+
+/* Dark mode (if you use .dark on html/body) */
+:root.dark .custom-card,
+.dark .custom-card {
+  --card-bg: #0b1220;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: none;
+}
+
+:root.dark .custom-card__title,
+.dark .custom-card__title {
+  color: #fff;
+}
+
+:root.dark .custom-card__text,
+.dark .custom-card__text {
+  color: #cbd5e1;
+}
