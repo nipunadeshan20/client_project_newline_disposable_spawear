@@ -1,0 +1,114 @@
+/* ---------- BUTTON GROUP LAYOUT ---------- */
+.button-group {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: nowrap;           /* Force single row */
+  overflow-x: auto;            /* Enable horizontal scroll on very small screens */
+  padding: 0 16px;             /* Small side padding so buttons don't touch edges */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  scrollbar-width: none;       /* Hide scrollbar Firefox */
+}
+
+.button-group::-webkit-scrollbar {
+  display: none;               /* Hide scrollbar Chrome/Safari/Edge */
+}
+
+/* Remove the old mobile stacking completely */
+@media (max-width: 640px) {
+  .button-group {
+    flex-direction: row !important;  /* Never stack */
+    justify-content: flex-start;     /* Let it scroll instead of center when overflowing */
+  }
+}
+
+/* ---------- ORIGINAL & REVERSED BUTTON ---------- */
+.normal-btn,
+.reversed-btn {
+  position: relative;
+  flex-shrink: 0;              /* Prevent squashing */
+  min-width: 140px;            /* Minimum readable size */
+  width: 200px;                /* Default desktop width */
+  padding: 12px 30px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: ease-out 0.5s;
+  border: 2px solid #000000;
+  white-space: nowrap;         /* Prevent text wrap */
+}
+
+.normal-btn {
+  color: #000000;
+  background: transparent;
+  box-shadow: inset 0 0 0 0 #000000;
+}
+
+.normal-btn:hover {
+  color: white;
+  box-shadow: inset 0 -100px 0 0 #000000;
+}
+
+.reversed-btn {
+  color: white;
+  background: #000000;
+  box-shadow: inset 0 -100px 0 0 transparent;
+}
+
+.reversed-btn:hover {
+  color: #000000;
+  background: transparent;
+  box-shadow: inset 0 0 0 0 #000000;
+}
+
+.normal-btn:active,
+.reversed-btn:active {
+  transform: scale(0.9);
+}
+
+/* Mobile & Tablet – Force both buttons to have identical width */
+@media (max-width: 768px) {
+  .button-group {
+    gap: 12px;
+  }
+
+  .normal-btn,
+  .reversed-btn {
+    width: 160px !important;     /* Same fixed width for both */
+    min-width: 160px !important;
+    max-width: 160px !important;
+    padding: 12px 20px;
+    font-size: 14.5px;
+    letter-spacing: 0.8px;
+    flex-shrink: 0;
+  }
+}
+
+/* Extra small phones – slightly smaller but still equal width */
+@media (max-width: 480px) {
+  .normal-btn,
+  .reversed-btn {
+    width: 110px !important;
+    min-width: 110px !important;
+    max-width: 110px !important;
+    padding: 8px 12px;
+    font-size: 10px;
+    text-align: center;
+  }
+}
+
+/* Desktop – original width */
+@media (min-width: 769px) {
+  .normal-btn,
+  .reversed-btn {
+    width: 200px;
+  }
+}
+
+
+
+
+
+

@@ -1,0 +1,6 @@
+@media (max-width: 320px) {
+  .responsive-img {
+    width: 4rem;  
+    height: 4rem; 
+  }
+}
