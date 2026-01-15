@@ -37,7 +37,7 @@ export default function AboutUs() {
             We are committed to delivering high-quality products designed with 
             comfort, durability, and purpose in mind. Our mission is to help 
             businesses and individuals find reliable, thoughtfully crafted 
-            solutions that support their everyday needs.
+            solutions that support their everyday needsssssss adadad.
           </p>
 
           <p className="text-gray-600 text-base md:text-lg leading-relaxed mt-4 text-center md:text-left animate-fade-right">
